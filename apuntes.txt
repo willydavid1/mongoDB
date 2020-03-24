@@ -1,0 +1,30 @@
+
+Que es mongoDb:
+
+Mongodb es una base de datos NoSQL multiplataforma, orientado a documentos y de código abierto. utiliza muchos conceptos del lenguaje de programación Javascript, como los objetos JSON, las funciones, operadores, entre otros más.
+- NoSQL significa Not Only SQL (no solo sql), MongoDB es una base de datos centrada para manejar enormes cantidades de datos que se generan muy rapido.
+
+Es flexible, escalable (podemos añadir mas recursos a nuestra base de datos añadiendo mas servidores) Y de proposito general (usada en cualquier tipo de aplicacion).
+- Orientado a documentos | DATO = DOCUMENTO (vamos a guardar datos JSON y a estos objetos se les denomina documentos)
+- Base de datos sin esquema (es decir no necesita reglas que rige la base de datos) 
+- Escalado horizontal: Cuendo la base de datos este creciendo no hace falta comprar un server mas pontente, solo comprar otro server y dividir en cluster
+- JSON como formato de dato: guardaremos los datos en este formato 
+
+- MongoDB Atlas es la solucion de mongoDb como empresa para proveernos de una nube un server para conectarnos y tener nuestro cluster alli.
+- MongoDB Server es DBMS la base de datos como tal que se instala en el servidor y tenemos la base de datos.
+- MongoDB Compass es una interfaz grafica para usar la base de datos.
+
+-------------------- MongoDB instalacion (MongoDB Server) ----------------
+
+https://www.mongodb.com/download-center/community y descargamos la MongoDB Community Server (Seleccionamos la version y el OS)
+Pesa 259 mb version 4.2.3
+
+Lo instalamos completo y no lo instalamos como un servicio (para que no inicie cuando encendemos el pc)
+Y instalamos MongoDB Compass y MongoDB Server
+
+Comprobar instalacion:
+1- Abrir la consola
+2- Ejecutar | mongod --version | Da error tenemos que agregarlo al PATH PATH es una variable de entorno de los sistemas operativos POSIX y los sistemas de Microsoft,en ella se especifican las rutas en las cuales el intérprete de comandos debe buscar los programas a ejecutar.
+
+
+

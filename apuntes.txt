@@ -7,24 +7,52 @@ Mongodb es una base de datos NoSQL multiplataforma, orientado a documentos y de 
 Es flexible, escalable (podemos añadir mas recursos a nuestra base de datos añadiendo mas servidores) Y de proposito general (usada en cualquier tipo de aplicacion).
 - Orientado a documentos | DATO = DOCUMENTO (vamos a guardar datos JSON y a estos objetos se les denomina documentos)
 - Base de datos sin esquema (es decir no necesita reglas que rige la base de datos) 
-- Escalado horizontal: Cuendo la base de datos este creciendo no hace falta comprar un server mas pontente, solo comprar otro server y dividir en cluster
-- JSON como formato de dato: guardaremos los datos en este formato 
+- Escalado horizontal: Cuando la base de datos este creciendo no hace falta comprar un server mas pontente, solo comprar otro server y dividir en cluster
+- JSON como formato de dato: guardaremos los datos en este formato.
 
 - MongoDB Atlas es la solucion de mongoDb como empresa para proveernos de una nube un server para conectarnos y tener nuestro cluster alli.
 - MongoDB Server es DBMS la base de datos como tal que se instala en el servidor y tenemos la base de datos.
 - MongoDB Compass es una interfaz grafica para usar la base de datos.
+
+
+
 
 -------------------- MongoDB instalacion (MongoDB Server) ----------------
 
 https://www.mongodb.com/download-center/community y descargamos la MongoDB Community Server (Seleccionamos la version y el OS)
 Pesa 259 mb version 4.2.3
 
-Lo instalamos completo y no lo instalamos como un servicio (para que no inicie cuando encendemos el pc)
+Lo instalamos completo y no lo instalamos como un servicio (para que no inicie cuando encendemos el pc | Install MongoD as a Service)
 Y instalamos MongoDB Compass y MongoDB Server
 
+- mongod (permite iniciar el servidor)
+- mongo (permite iteractuar con la base de datos desde una shell y podemos guardar datos, actualizarlos, eliminarlos, ect) 
+
 Comprobar instalacion:
-1- Abrir la consola
-2- Ejecutar | mongod --version | Da error tenemos que agregarlo al PATH PATH es una variable de entorno de los sistemas operativos POSIX y los sistemas de Microsoft,en ella se especifican las rutas en las cuales el intérprete de comandos debe buscar los programas a ejecutar.
+1- Abrir la consola o terminal
+2- Ejecutar | mongod --version | Da error tenemos que agregarlo al PATH PATH es una variable de entorno de los sistemas operativos POSIX y los sistemas de Microsoft, en ella se especifican las rutas en las cuales la consola debe buscar los programas a ejecutar desde cualquier parte.
+3- Saber la ruta donde esta instalado mongo y en la carpeta bin tenemos los programas de mongoDB | ruta C:\Program Files\MongoDB\Server\4.2\bin
+4- Ya estando en la carpeta bin de mongo desde la consola .\mongod.exe --version
+
+MongoDB esta funcionando pero desde la carpeta Lo agregamos al PATH:
+1- Copiamos la ruta de bin de la carpeta mongo | C:\Program Files\MongoDB\Server\4.2\bin
+2- Abrimos este Equipo => Propiedades => Configuracion avanzada del sistema => variables de entorno => doble click a path => nuevo y pegamos la direccion + enter => le damos a todo aceptar.
+
+Y listo ya nos funciona mongod desde cualquier ruta en la consola. (mongod --version y mongo --version)
+
+Configuracion para el comando mongod para que se quede ejecutando y no se cierre en la consola:
+1- Para ejecutar la base de datos tipeamos mongod pero se cierra
+2- Ir a ruta C o a la raiz y crear una carpeta llamada data y dentro de data una llamada DB
+Y listo ya se queda ejecutando el comando mongod en la consola y no se cierra (esta escuchando en el puerto 27017) y si desde otra consola ejecutamos mongo nos abre un shell para hacer peticiones a la base de datos
+
+PASOS (resumen):
+- Descargar y instalar mongoDB desde la web oficial (no lo instalamos como un servicio)
+- Comprobar instalacion, pero para eso necesitamos:
+    - Agregar la ruta de mongo al PATH (para usar mongo desde cualquier directorio) C:\Program Files\MongoDB\Server\4.2\bin
+    - Ir a ruta C o a la raiz y crear una carpeta llamada data y dentro de data una llamada DB
+Y LISTO :)
 
 
+
+-------------------- Conceptos Básicos de MongoDB ----------------------
 

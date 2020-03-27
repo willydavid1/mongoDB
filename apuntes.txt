@@ -66,4 +66,53 @@ DB => tiene Collections => y las Collections coleccionan documentos (JSON)
 
 
 
--------------------------- Mongo SHELL ------------------------------
+-------------------------- Mongo SHELL (mongo)------------------------------
+
+- mongod (permite iniciar el servidor)
+- mongo (permite iteractuar con la base de datos desde una shell y podemos guardar datos, actualizarlos, eliminarlos, ect) es un interprete de javascript (es decir podemos ejecutar codigo js en esa SHELL)
+
+Iniciamos la base de datos en la CMD comando: mongod
+Abrimos otra consola y tipeamos mongo (mongo es la SHELL)
+
+Palabras reservadas de mongo:
+- db : retorna la base de datos actual que estamos utilizando.
+- show dbs: retorna todas las bases de datos. (hasta ahora tenemos admin, config, local)
+- help: retona los comandos principales
+- db.help(): muestra todos los metodos para realizar a las bases de datos.
+
+- use NOMBRE_BASE_DE_DATOS | Para crear una base de datos, pero no la crea hasta como minimo insertar un dato dentro de una colección o crear una colección.
+- db.productos.insert({ "name": "laptop" }) | Para insertar un dato en la colección productos dentro de la base de datos.
+- show collections | retorna las colecciones de una base de datos.
+
+- db.dropDatabase() | elimina la base de datos actual donde estemos 
+
+Colecciones:
+- show collections | retorna las colecciones de una base de datos.
+- db.createCollection("NOMBRE_COLECCION") | crea una colección dentro de la base de datos.
+- db.colección.drop() db.productos.drop() | Elimina una colección (en este caso la de productos)
+
+Documentos (Son los datos en formato JSON):
+- Aceptan datos de tipo string, number, bolean, fechas (con objeto new Date() gracias al interprete), expresiones regulares, arreglos, objetos 
+- Conclusion los documentos soportan todo los tipos de datos de un JSON.
+
+- db.productos.insert({ AQUI VA EL DOCUMENTO JSON }) | Esto inserta un documento-JSON dentro de una colección (si no existe la colección la crea)
+- db.productos.find() | De la colección productos quiero buscar todos los documentos (busca todos los datos de la colección productos y los muestra en una linea)
+- db.productos.find().pretty() | Busca todos los documentos de una colección de manera ordenada (no todo en una sola linea).
+
+CUANDO INSERTAMOS DOCUMENTOS-JSON LE CREA UN ATRIBUTO LLAMADO ID UNICO AL DOCUMENTO
+
+{
+    "nombre": "laptop",
+    "precio": 40.2,
+    "active": false,
+    "created_at": new Date("12/12/1999"),
+    "somedata": [1, "a", []],
+    "atributoOBJ": {
+        "nombre": "willy",
+        "version": "xps",
+        "ubicacion": {
+            "ciudad": "USA",
+            "direccion": "Algun lugar de USA"
+        }
+    }
+}

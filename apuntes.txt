@@ -56,3 +56,14 @@ Y LISTO :)
 
 -------------------- Conceptos Básicos de MongoDB ----------------------
 
+- Base de datos: Es donde Almacenamos todos los datos de la app en formato JSON.
+- Collections (Colecciones): Podemos tener colecciones de datos, Es cuando queremos agrupar datos. Ejemplo la colección de usuarios, productos, categorias, vendedores, ect es como las tablas solo que las Colecciones tienen una colección de documentos.
+- Documentos: Son los datos en formato JSON
+
+ESTRUCTURA BASICA DE MONGODB:
+DB => tiene Collections => y las Collections coleccionan documentos (JSON)
+
+
+
+
+-------------------------- Mongo SHELL ------------------------------

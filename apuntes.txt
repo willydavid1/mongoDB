@@ -211,3 +211,18 @@ Tambien elimina todos los documentos que cumplan la condicion
 
 - db.productos.remove({}) | Elimina todos los documentos de una base de datos
 
+
+
+
+
+
+---------------------- MongoDB Compass ------------------------
+
+- MongoDB Compass es una interfaz grafica para usar la base de datos.
+Podemos Conectarnos a una instancia de mongoDB en este caso nos conectaremos a la de la consola que iniciamos de mongod en el puerto 27017 y no tenemos ninguna autenticacion para conectarnos a la base de datos Y listo ya nos conectamos a la base de datos desde una interfaz grafica
+
+Y desde alli podemos ver las DB las colecciones y los documentos ademas podemos realizar operaciones CRUD a los documentos.
+
+- Robo 3t, mongoBooster => Es otra interfaz grafica para interactuar con nuestra base de datos.
+
+Ya en produccion puedo usar MongoDB Atlas.

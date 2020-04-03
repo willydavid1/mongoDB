@@ -99,8 +99,9 @@ Documentos (Son los datos en formato JSON):
 - db.productos.find() | De la colección productos quiero buscar todos los documentos (busca todos los datos de la colección productos y los muestra en una linea)
 - db.productos.find().pretty() | Busca todos los documentos de una colección de manera ordenada (no todo en una sola linea).
 
-CUANDO INSERTAMOS DOCUMENTOS-JSON LE CREA UN ATRIBUTO LLAMADO ID UNICO AL DOCUMENTO
+CUANDO INSERTAMOS DOCUMENTOS-JSON LE CREA UN ATRIBUTO LLAMADO _ID UNICO AL DOCUMENTO
 
+MongoDB pasa los datos de formato JSON a formato BSON para que mongoDB pueda tener un mejor rendimiento para manejar grandes cantidades de datos, pero eso sucede internamente nosotros vamos a manipular los datos mediante el formato JSON
 {
     "nombre": "laptop",
     "precio": 40.2,
@@ -116,3 +117,97 @@ CUANDO INSERTAMOS DOCUMENTOS-JSON LE CREA UN ATRIBUTO LLAMADO ID UNICO AL DOCUME
         }
     }
 }
+
+
+---------------------- OPERACIONES CRUD ------------------------
+
+----INSERTAR DATOS (DOCUMENTOS)----
+Para crear un documento usamos el metodo insert:
+- Podemos insertar datos sin una misma estructura para cada documento (unos pueden tener otros atributos diferentes a otros)
+- db.productos.insert({ AQUI VA EL DOCUMENTO JSON }) | Esto inserta un documento-JSON dentro de una colección (si no existe la colección la crea)
+- Esto inserta varios documentos a la vez se le pasa un array con los documentos-JSON al metodo insert:
+db.productos.insert([ 
+    {
+        "name": "mouse",
+        "description": "razer mouse",
+        "tags": ["computers", "gaming"],
+        "cantidad": 14,
+        "created_at": new Date()
+    },
+    {
+        "name": "monitor",
+        "description": "lg monitor",
+        "tags": ["computers", "gaming"],
+        "cantidad": 3,
+        "created_at": new Date()
+    } 
+])
+
+
+----LEER O LISTAR DATOS (DOCUMENTOS)----
+Para leer o listar los datos (consulta) metodo find:
+- db.productos.find() | De la colección productos quiero buscar todos los documentos (busca todos los datos de la colección productos y los muestra en una linea)
+- db.COLECCION.find().pretty() | Busca todos los documentos de una colección de manera ordenada (no todo en una sola linea).
+
+CONSULTA PERSONALIZADA (UN DOCUMENTO EN ESPECIFICO):
+- db.productos.find({ name: "mouse" }) | Esto me retorna un documento de la colección donde el atributo name tenga como valor "mouse" (el metodo recibe un objeto JS)
+- Podemos concatenar con el metodo .pretty() para obtener el documento-JSON ordenado
+
+- db.productos.find({ "tags": "computers" }).pretty() | Buscar los documentos-JSON con atributo tags que como valor en el array tenga un el string "computers" Retorna los objetos que cumplan la condicion.
+- db.productos.find({ "tags": "computers", "name": "monitor" }).pretty() | Me retorna el documento que cumpla con las dos condiciones. 
+
+METODO QUE ME RETORNA UN SOLO DOCUMENTO:
+- db.productos.findOne({ "tags": "computers" }) | Me retorna solo el primer documento de todos los documentos.
+
+LEER SOLO ATRIBUTOS ESPECIFICOS DE UN DOCUMENTO:
+- db.COLECCION.find({ CONDICION }, { ATRIBUTOS QUE QUIERO RETORNAR })
+- db.productos.find({ "tags": "computers" }, {"name": 1,"description": 1}) | Me retorna los atributos name y description de todos los productos que cumplan la condicion.
+
+ORDENAR LOS RESULTADOS DE UNA CONSULTA POR ORDEN ALFABETICO:
+- db.productos.find({ "tags": "computers" }).sort({name:1})
+
+ESTABLECER UN LIMITE:
+- db.productos.find().limit(2) | Solo me retorna los primeros 2 documentos de la colección.
+
+CONTAR CUANTOS DOCUMENTOS TENEMOS EN UNA COLECCION:
+- db.productos.count() | Me retorna el numero de documentos que hay en una COLECCION
+
+ITERAMOS UN RESULTADO CON FOREACH Y PRINT:
+- db.productos.find().forEach( (producto) => print("Nombre del producto: " + producto.name) ) | De todos los documentos de la COLECCION, iteramos cada uno y imprimo en pantalla el atributo name de cada documento en especifico. (Si el atributo que intentamos iterar no existe retorna undefined) 
+
+
+----ACTUALIZAR DATOS (DOCUMENTOS)----
+
+Para actualizar un dato usamos db.COLECCION.update({VALOR A MODIFICAR}, {NUEVOS VALORES A ACTUALIZAR})
+1er parametro lo que queremos Actualizar 2do parametro nuevos valores a actualizar. REEMPLAZA TODO EL DOCUMENTO
+
+- db.productos.update({ name: "teclado" }, { price: 99.99 }) | Esto actualiza todo el documento con los valores que le damos (price en este caso).
+- db.productos.update({ price: 10 }, { name: "teclado", price: 99.99 }) | Esto actualiza el documento que tenga el precio 10 por los atributos que le pasamos en el segundo documento.
+
+
+$SET - PARA MODIFICAR SOLO UN ATRIBUTO DENTRO DE UN DOCUMENTO
+- db.productos.update({ "name": "pc"}, { "$set": { "description": "Lg gran pc" } }) | Al documento con name de pc quiero modificar o establecer un nuevo atributo destription con valor de lg gran pc
+Ahora el documento tiene el atributo description modificado y si no existia lo crea.
+
+SI NO EXISTE ESTE DATO A ACTUALIZAR LO INSERTA {upsert:true}
+- db.productos.update({ name: "desktop" }, {$set: { "description": "gaming desktop" } }, {upsert:true} ) 
+- Si no hay un documento con el atributo name: desktop para actualizar. inserta en la colección este documento
+
+$INC - INCREMENTAR UN VALOR NUMERICO
+- db.productos.update({ name: "teclado" }, { $inc: {price: 90} }) 
+El documento con atributo name: "teclado" le vamos a incrementar el atributo precio en 90. (el valor que tenia sumale 90)
+
+$RENAME - RENOMBRAR PROPIEDADES O CLAVES DE UN DOCUMENTO
+- db.productos.update({ name: "pc" }, { $rename: {name: "nombre"} } ) 
+Esto renombra el atributo name de la clave.
+
+
+
+----ELIMINAR DATOS (DOCUMENTOS)----
+
+- db.productos.remove({ name: "teclado" }) 
+Elimina el documento que tenga como atributo name:"teclado" elimina el documento
+Tambien elimina todos los documentos que cumplan la condicion
+
+- db.productos.remove({}) | Elimina todos los documentos de una base de datos
+
